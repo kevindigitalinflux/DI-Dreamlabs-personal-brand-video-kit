@@ -1,0 +1,18 @@
+# never commit secrets, footage, brand marks or renders
+.env
+*.env
+.env.*
+brand/brand.json
+brand/logos/
+brand/fonts/
+projects/
+*.mp4
+*.mov
+*.mkv
+*.wav
+*.mp3
+node_modules/
+.hyperframes/
+herk-edit-kit/
+*.key
+*.pem

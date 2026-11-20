@@ -1,0 +1,30 @@
+{
+  "_note": "Copy to brand/brand.json (git-ignored) and fill in. Your agent can fill it by interviewing you: see brand/BRAND-INTERVIEW.md",
+  "name": "Your Brand",
+  "handle": "@yourhandle",
+  "colors": {
+    "background": "#0B1020",
+    "text": "#F5F5F7",
+    "accent": "#7C3AED",
+    "accentText": "#FFFFFF"
+  },
+  "fonts": {
+    "emphasis": "Montserrat ExtraBold",
+    "body": "DM Sans Medium",
+    "giantCaption": "Big Shoulders Bold",
+    "accentSerif": "Instrument Serif Italic"
+  },
+  "logos": {
+    "_rule": "Put files in brand/logos/ (git-ignored). Logos sit on the background or text colour tile, never on the accent colour.",
+    "primary": "brand/logos/primary.png",
+    "partners": []
+  },
+  "captions": { "band": [1600, 1700], "maxWords": 3, "keywordStyle": "emphasis in accent colour with a 3 px text-colour outline" },
+  "delivery": { "reel": "1080x1920 30fps H.264 AAC", "long": "1920x1080", "loudnessLUFS": -14, "truePeakDBTP": -1.5 },
+  "rules": {
+    "noMusic": true,
+    "noZoomsInReels": true,
+    "noStickFigures": true,
+    "logosOnlyWithPermission": true
+  }
+}
