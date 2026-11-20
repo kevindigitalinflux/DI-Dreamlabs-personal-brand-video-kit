@@ -1,0 +1,27 @@
+/* Shared styles for the components. Colours and fonts come from brand.json via instantiate.mjs,
+   which writes the :root block below into the project's index.html. Edit values in brand/brand.json, not here. */
+:root {
+  --bg: #0B1020;          /* brand.colors.background */
+  --text: #F5F5F7;        /* brand.colors.text */
+  --accent: #7C3AED;      /* brand.colors.accent */
+  --accent-text: #FFFFFF; /* brand.colors.accentText */
+  --accent-soft: #A78BFA; /* lighter accent for text on dark glass (auto-derived) */
+  --font-emphasis: "Montserrat", "Arial Black", sans-serif;
+  --font-body: "DM Sans", Arial, sans-serif;
+  --font-giant: "Big Shoulders Display", "Arial Narrow", sans-serif;
+  --font-serif: "Instrument Serif", Georgia, serif;
+}
+*{box-sizing:border-box}
+.scene-art{font:800 48px/1.04 var(--font-emphasis);color:var(--text)}
+.item{opacity:0}
+.txt{display:inline-block}
+.accent{color:var(--accent-soft)}
+/* glass card: translucent, blurred, hairline border */
+.glass{background:linear-gradient(124deg,color-mix(in srgb,var(--text) 13%,transparent) 0,color-mix(in srgb,var(--text) 4%,transparent) 60%),color-mix(in srgb,var(--bg) 72%,transparent);border:1.5px solid color-mix(in srgb,var(--text) 20%,transparent);border-radius:24px;box-shadow:0 14px 26px rgba(0,0,0,.3);backdrop-filter:blur(24px)}
+/* logo tile: light tile so any logo reads. Never put a logo on the accent colour. */
+.logo-tile{color:var(--bg);background:var(--text);border-radius:24px;display:flex;align-items:center;justify-content:center}
+.logo-tile img{object-fit:contain}
+/* captions (see make-captions.mjs): fixed low band, centred on x 540 */
+.caption-slot{position:absolute;z-index:15;left:540px;transform:translateX(-50%);height:100px;display:flex;align-items:center;justify-content:center;top:1600px}
+.caption-art{display:block;white-space:nowrap;border-radius:16px;height:100px;padding:0 21px;background:color-mix(in srgb,var(--bg) 92%,transparent);color:var(--text);font:500 78px/100px var(--font-body)}
+.caption-art strong{font:800 78px/100px var(--font-emphasis);color:var(--accent);-webkit-text-stroke:3px var(--text);paint-order:stroke fill}

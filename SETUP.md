@@ -45,8 +45,8 @@ Only list what is missing. Typical install commands (use the package manager the
 Also in the plan:
 
 - **Hyperframes plugin** (open source, Apache-2.0, renders video from HTML). Official source: https://github.com/heygen-com/hyperframes. This kit was built and tested with version **0.8.162**.
-  - Claude Code: `claude plugin marketplace add heygen-com/hyperframes` then `claude plugin install hyperframes@hyperframes`.
-  - Codex: follow the Codex plugin instructions in the official README (the exact command was not verified when this kit was written; open the README and use what it says).
+  - Claude Code (from the official README): `claude plugin marketplace add heygen-com/hyperframes` then `claude plugin install hyperframes@hyperframes`.
+  - Codex (verified against Codex CLI 0.170.0 `--help`, and against a working install of 0.8.162): `codex plugin marketplace add heygen-com/hyperframes@v0.8.162` (the `owner/repo@ref` form pins the release tag) then `codex plugin add hyperframes@hyperframes`. Restart Codex afterwards. Confirm with `codex plugin list`.
   - After installing, find the plugin's pinned launcher: `<plugin root>/skills/hyperframes/scripts/plugin-cli.mjs`. Record the plugin version. If it is not 0.8.162, tell the person; the kit probably still works, but run the self-test in Step 7 and report any difference.
   - Set `HYPERFRAMES_NO_TELEMETRY=1` when running Hyperframes commands unless the person says otherwise.
 - **Herk Edit Kit** (MIT, editing scripts and skills by Nate Herk): `git clone https://github.com/nateherkai/herk-edit-kit herk-edit-kit`, then `git -C herk-edit-kit checkout 10511e5af86fc47756ea89803b397422e2d89284`, then `npm ci` inside it. Do NOT use its ElevenLabs transcription script (paid). Transcription here is local Parakeet through Hyperframes (`transcribe --engine parakeet`).
@@ -82,6 +82,7 @@ Read `brand/BRAND-INTERVIEW.md`. Ask the questions in groups of two or three. Wr
 1. Print the versions of `ffmpeg`, `ffprobe`, `node`, `python`.
 2. Create a Hyperframes test project in a temp folder with the pinned launcher: `node <launcher> init selftest --non-interactive`, then inside it `node <launcher> check --timeout 30000 --json`, then a short draft render. Confirm an MP4 exists with `ffprobe`.
 3. Run `python tools/audio/comb_detect.py --help` to confirm Python works.
+   Also build the component demo: `node components/instantiate.mjs brand/brand.json <project>/demo` (use `brand/brand.example.json` if there is no brand.json yet), then `node <launcher> lint` and `node <launcher> check --timeout 60000 --json` inside it. Expect 0 errors.
 4. Report PASS or FAIL for each line in a small table with the versions found. Delete the temp folder only after telling the person.
 
 ## Step 8: hand over

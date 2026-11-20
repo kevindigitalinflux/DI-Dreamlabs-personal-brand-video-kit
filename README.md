@@ -33,6 +33,7 @@ Logins, paid services, uploads and publishing always stop and ask you. Nothing i
 | `docs/REEL-9x16-BLOCKS.md` | The motion-graphics components: room extension, layout slides, captions, pay board, logo row, checklist, offer card, cover |
 | `docs/LESSONS.md` | Real mistakes and fixes (hollow audio from two microphones, zoom bugs, cleanup) |
 | `tools/audio/` | Python tools (standard library only) to detect and fix a comb-filter echo and to build the final voice track |
+| `components/` | Ready-to-use Hyperframes motion graphics: hook giant, logo row, checklist, pay board, offer card, captions. Colours, fonts and your logo come from `brand.json` |
 | `templates/` | Plan and Codex brief templates |
 | `brand/` | `brand.example.json` and the brand interview. Your real `brand.json` and logos are git-ignored |
 | `scripts/` | Check scripts for Windows (PowerShell) and Mac/Linux (bash) |

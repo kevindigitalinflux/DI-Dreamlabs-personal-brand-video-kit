@@ -49,4 +49,4 @@ See `skills/pb-edit-pipeline/SKILL.md` ("Audio") and `tools/audio/`.
 
 ## Status of the code
 
-This repo ships the specifications, the audio tools and the plan templates. The original Hyperframes generators for these blocks contain one brand's content, so they are not included yet. Ask your planner model to turn each block above into a parameterised Hyperframes component that reads `brand/brand.json`, and build them one at a time with a sample gate after each.
+Ready-to-use Hyperframes components for blocks 5 to 10 are in `components/` (hook giant, logo row, checklist, pay board, offer card, plus caption styles and `make-captions.mjs`). They take colours and fonts from `brand/brand.json` and have logo slots for your own logo. See `components/README.md`. Not yet components: the presenter crop, room extension and layout slides (they depend on your footage; build them from the specs above with your planner model, one at a time with a sample gate), and the cover page.

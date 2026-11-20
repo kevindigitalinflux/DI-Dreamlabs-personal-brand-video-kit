@@ -1,0 +1,40 @@
+<!-- OFFER CARD: a glass card that builds line by line on the spoken words, ends on the URL, and HOLDS to the last frame.
+     Replace every text. Add only a call to action the speaker actually said. The logo slot is the <img> in the brand line:
+     use YOUR logo file (brand/logos/primary.png copied to assets/logos/). -->
+<template><div id="offer-card" class="scene-art" data-composition-id="offer-card" data-width="1080" data-height="1920" data-duration="9" style="position:absolute;inset:0;width:1080px;height:1920px;pointer-events:none">
+<style>
+#offer-card .card{position:absolute;left:100px;top:300px;width:780px;padding:30px 36px;display:grid;gap:14px;justify-items:start}
+#offer-card .brandline{display:flex;align-items:center;gap:18px;font-size:34px}
+#offer-card .brandline .logo-tile{width:96px;height:96px;border-radius:20px}
+#offer-card .sale{font-size:64px;letter-spacing:-.02em}
+#offer-card .ends{font:500 34px/1 var(--font-body)}
+#offer-card .code{font-size:44px;padding:8px 20px;border-radius:14px;background:var(--accent);color:var(--accent-text)}
+#offer-card .big{font-size:120px;line-height:.95;letter-spacing:-.03em}
+#offer-card .places{font-size:50px}
+#offer-card .cta{font-size:52px}
+#offer-card .url{font-size:46px;color:var(--accent-soft)}
+</style>
+<div id="offer-card-shell" class="item glass card">
+  <div id="offer-card-brand" class="item brandline"><span class="logo-tile"><img data-safe="logo" src="assets/logos/primary.svg" alt="Your logo" style="width:72px;height:72px"></span><span data-safe="text" class="txt">YOUR BRAND</span></div>
+  <div id="offer-card-sale" class="item sale"><span data-safe="text" class="txt">SPRING SALE</span></div>
+  <div id="offer-card-ends" class="item ends"><span data-safe="text" class="txt">ENDS 30 JUNE</span></div>
+  <div id="offer-card-code" class="item code"><span data-safe="text" class="txt">CODE SAVE20</span></div>
+  <div id="offer-card-big" class="item big"><span data-safe="text" class="txt">20% <span class="accent">OFF</span></span></div>
+  <div id="offer-card-places" class="item places"><span data-safe="text" class="txt">10 PLACES</span></div>
+  <div id="offer-card-cta" class="item cta"><span data-safe="text" class="txt">FIND OUT <span class="accent">MORE</span></span></div>
+  <div id="offer-card-url" class="item url"><span data-safe="text" class="txt">yourwebsite.com</span></div>
+</div>
+<script>(function(){
+const tl=gsap.timeline({paused:true});
+const root=document.querySelector(".scene-art#offer-card");
+const sel=n=>root.querySelector("#offer-card-"+n);
+const host=root.closest("[data-beats]");
+const beat=JSON.parse(host?.getAttribute("data-beats")||'{"shell":0,"brand":6,"sale":20,"ends":50,"code":80,"big":110,"places":140,"cta":175,"url":215}');
+const dur=9, time=f=>f/30, t=n=>time(beat[n]);
+tl.fromTo(sel("shell"),{opacity:0,y:14},{opacity:1,y:0,duration:time(12),ease:"power3.out",immediateRender:false},t("shell"));
+["brand","sale","ends","code","big","places","cta","url"].forEach(n=>
+  tl.fromTo(sel(n),{opacity:0,y:10},{opacity:1,y:0,duration:time(10),ease:"power3.out",immediateRender:false},t(n)));
+// NO exit tween on purpose: the URL card holds, fully visible, to the last frame.
+tl.to({},{duration:dur},0);
+window.__timelines=window.__timelines||{};window.__timelines["offer-card"]=tl;
+})();</script></div></template>

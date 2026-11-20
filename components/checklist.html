@@ -1,0 +1,29 @@
+<!-- CHECKLIST: three outcomes, each on its spoken word, with a tick 8 frames later. -->
+<template><div id="checklist" class="scene-art" data-composition-id="checklist" data-width="1080" data-height="1920" data-duration="5" style="position:absolute;inset:0;width:1080px;height:1920px;pointer-events:none">
+<style>
+#checklist .card{position:absolute;left:100px;top:330px;width:780px;padding:30px 34px;display:grid;gap:22px}
+#checklist .row{display:flex;align-items:center;gap:24px;font-size:56px}
+#checklist .tick{width:64px;height:64px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;flex:none;opacity:0}
+#checklist .tick svg{width:36px;height:36px;stroke:var(--accent-text);stroke-width:5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+</style>
+<div id="checklist-card" class="item glass card">
+  <div id="checklist-r1" class="item row"><span class="tick" id="checklist-t1"><svg viewBox="0 0 24 24"><path d="M5 12l4.5 4.5L19 7"/></svg></span><span data-safe="text" class="txt">REAL CLIENT BRIEF</span></div>
+  <div id="checklist-r2" class="item row"><span class="tick" id="checklist-t2"><svg viewBox="0 0 24 24"><path d="M5 12l4.5 4.5L19 7"/></svg></span><span data-safe="text" class="txt">LIVE PRODUCT</span></div>
+  <div id="checklist-r3" class="item row"><span class="tick" id="checklist-t3"><svg viewBox="0 0 24 24"><path d="M5 12l4.5 4.5L19 7"/></svg></span><span data-safe="text" class="txt">CERTIFICATE</span></div>
+</div>
+<script>(function(){
+const tl=gsap.timeline({paused:true});
+const root=document.querySelector(".scene-art#checklist");
+const sel=n=>root.querySelector("#checklist-"+n);
+const host=root.closest("[data-beats]");
+const beat=JSON.parse(host?.getAttribute("data-beats")||'{"card":0,"r1":10,"r2":50,"r3":90}');
+const dur=5, time=f=>f/30, t=n=>time(beat[n]);
+tl.fromTo(sel("card"),{opacity:0,y:12},{opacity:1,y:0,duration:time(10),immediateRender:false},t("card"));
+["1","2","3"].forEach(i=>{
+  tl.fromTo(sel("r"+i),{opacity:0,x:-30},{opacity:1,x:0,duration:time(12),ease:"power3.out",immediateRender:false},t("r"+i));
+  tl.fromTo(sel("t"+i),{opacity:0,scale:.5},{opacity:1,scale:1,duration:time(8),ease:"back.out(2)",immediateRender:false},t("r"+i)+time(8));
+});
+tl.to(root.querySelectorAll(".item"),{opacity:0,duration:time(6),ease:"power2.in"},dur-time(6));
+tl.to({},{duration:dur},0);
+window.__timelines=window.__timelines||{};window.__timelines["checklist"]=tl;
+})();</script></div></template>

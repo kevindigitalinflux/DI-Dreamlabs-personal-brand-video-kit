@@ -1,0 +1,38 @@
+<!-- SALARY BOARD: rows slide in one at a time, the figure counts up from zero, a tag says ADVERTISED or TYPICAL.
+     ALL FIGURES BELOW ARE EXAMPLES. Replace with real, sourced figures. Never imply earnings are guaranteed.
+     Keep the footer. Keep it at least 40 px above the presenter's eyes on every frame.
+     Use a company logo only with permission; this component uses text only. -->
+<template><div id="pay-board" class="scene-art" data-composition-id="pay-board" data-width="1080" data-height="1920" data-duration="7" style="position:absolute;inset:0;width:1080px;height:1920px;pointer-events:none">
+<style>
+#pay-board .pay-title{position:absolute;left:100px;top:290px;width:780px;font-size:50px;line-height:1.08}
+#pay-board .pay-row{position:absolute;left:100px;top:400px;width:780px;padding:26px 32px;display:grid;gap:10px}
+#pay-board .pay-tag{display:inline-block;font-size:26px;letter-spacing:.06em;padding:6px 14px;border-radius:10px;background:var(--accent);color:var(--accent-text);width:max-content}
+#pay-board .pay-tag.typical{background:transparent;border:2px dashed var(--text);color:var(--text)}
+#pay-board .pay-place{font-size:34px}
+#pay-board .pay-amount{font-size:78px;letter-spacing:-.02em;min-height:84px}
+#pay-board .pay-role{font:500 36px/1.1 var(--font-body)}
+#pay-board .pay-footer{position:absolute;left:100px;top:790px;width:780px;font:500 28px/1.15 var(--font-body);opacity:0}
+</style>
+<div id="pay-board-title" class="item pay-title"><span data-safe="text" class="txt">JUST SOME EXAMPLES<br>OF JOB POSTINGS</span></div>
+<div id="pay-board-one" class="item glass pay-row"><span id="pay-board-one-tag" class="pay-tag">ADVERTISED PAY</span><span data-safe="text" class="txt pay-place" id="pay-board-one-place">CITY ONE</span><span data-safe="text" class="txt pay-amount" id="pay-board-one-amount"></span><span data-safe="text" class="txt pay-role">Job title · Company (EXAMPLE)</span></div>
+<div id="pay-board-two" class="item glass pay-row"><span id="pay-board-two-tag" class="pay-tag typical">TYPICAL PAY · TOP OF RANGE</span><span data-safe="text" class="txt pay-amount" id="pay-board-two-amount"></span><span data-safe="text" class="txt pay-role">Job title · Country (EXAMPLE)</span></div>
+<div id="pay-board-footer" class="item pay-footer"><span data-safe="text" class="txt">Example figures only. Advertised base salaries are from job ads; typical pay is a survey range, not a job ad. Not a guarantee of earnings or job offers.</span></div>
+<script>(function(){
+const tl=gsap.timeline({paused:true});
+const root=document.querySelector(".scene-art#pay-board");
+const sel=n=>root.querySelector("#pay-board-"+n);
+const host=root.closest("[data-beats]");
+const beat=JSON.parse(host?.getAttribute("data-beats")||'{"title":0,"one":10,"oneEnd":60,"two":100,"twoEnd":170}');
+const dur=7, time=f=>f/30, t=n=>time(beat[n]);
+// count up from zero between two beats; cubic ease-out
+const money=(name,symbol,value,start,end)=>{const el=sel(name+"-amount");const len=beat[end]-beat[start];for(let s=0;s<=len;s++){const e=1-Math.pow(1-s/len,3);tl.set(el,{textContent:"UP TO "+symbol+Math.round(value*e).toLocaleString("en-GB")},t(start)+time(s));}};
+tl.set(sel("title"),{opacity:1},t("title"));tl.set(sel("footer"),{opacity:1},t("title"));
+tl.fromTo(sel("one"),{opacity:0,x:-25},{opacity:1,x:0,duration:time(14),ease:"power3.out",immediateRender:false},t("one"));
+money("one","£",100000,"one","oneEnd");
+tl.set(sel("one"),{opacity:0},t("two"));
+tl.fromTo(sel("two"),{opacity:0,x:-15},{opacity:1,x:0,duration:time(14),ease:"power3.out",immediateRender:false},t("two"));
+money("two","€",90000,"two","twoEnd");
+tl.to(root.querySelectorAll(".item:not(.pay-footer)"),{opacity:0,duration:time(5),ease:"power2.in"},dur-time(5));
+tl.to({},{duration:dur},0);
+window.__timelines=window.__timelines||{};window.__timelines["pay-board"]=tl;
+})();</script></div></template>

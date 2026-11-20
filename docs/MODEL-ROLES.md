@@ -2,10 +2,10 @@
 
 | Job | Use | Why |
 |---|---|---|
-| Plan, write briefs, review, decide design tradeoffs, security-sensitive choices | **Claude Opus** (current best: Opus 5.5, id `claude-opus-5-5`), or the strongest Codex model your account offers (the creator calls it "Codex Astra"; confirm the exact name in your Codex model picker) | Deeper reasoning, catches the misread the builder would make |
-| Build: generators, compositions, scripts, long renders, QA runs | **Claude Sonnet** (current: Sonnet 5.5, id `claude-sonnet-5-5`), or Codex at **high effort** (the creator calls it "Codex Sol 6.2"; confirm the exact name in your picker) | Fast and cheap enough to iterate |
+| Plan, write briefs, review, decide design tradeoffs, security-sensitive choices | **Claude Opus** (current best: Opus 5.5, id `claude-opus-5-5`), or the strongest Codex model your account offers (**Codex Astra**, a Codex model; pick it in your Codex model picker) | Deeper reasoning, catches the misread the builder would make |
+| Build: generators, compositions, scripts, long renders, QA runs | **Claude Sonnet** (current: Sonnet 5.5, id `claude-sonnet-5-5`), or Codex at **high effort** (**Codex Sol 6.2** at high reasoning effort) | Fast and cheap enough to iterate |
 
-The names "Codex Astra" and "Codex Sol 6.2" are the creator's labels and are NOT verified model ids. If your agent cannot find them, it picks the closest: the highest-reasoning model for planning, a mid-tier model at high effort for building. Model ids change; your agent checks what is available before assuming.
+Codex Astra and Codex Sol 6.2 are two Codex models named by the kit's creator; the exact ids come from your own Codex model picker, which may differ by account and over time. If one is not offered to you, use the closest: the highest-reasoning model for planning, a workhorse model at high effort for building. Your agent checks what is available before assuming.
 
 ## How the hand-off works
 

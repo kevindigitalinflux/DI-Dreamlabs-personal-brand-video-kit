@@ -1,0 +1,33 @@
+<!-- LOGO ROW: a rule line plus up to four tool or partner tiles that pop on their spoken words.
+     Edit the text, the img src files (brand/logos or assets/logos) and the data-beats frames.
+     LOGO RULE: only logos you own or have written permission to use. Otherwise delete the <img> and keep the text label.
+     Duplicate the file and change every id prefix "logo-row" to use it twice. -->
+<template><div id="logo-row" class="scene-art" data-composition-id="logo-row" data-width="1080" data-height="1920" data-duration="4" style="position:absolute;inset:0;width:1080px;height:1920px;pointer-events:none">
+<style>
+#logo-row .tool-title{position:absolute;left:100px;top:300px;width:780px;padding:22px 30px;display:flex;flex-direction:column;gap:8px}
+#logo-row .tool-title .txt{font-size:46px}
+#logo-row .tools{position:absolute;left:100px;top:470px;width:780px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+#logo-row .tool-row{height:120px;gap:22px;padding:0 24px;font-size:40px;justify-content:flex-start}
+</style>
+<div id="logo-row-title" class="item glass tool-title"><span data-safe="text" class="txt">6 WEEKS</span><span data-safe="text" class="txt accent">NO EXPERIENCE NEEDED</span></div>
+<div class="tools">
+  <div id="logo-row-a" class="item logo-tile tool-row"><img data-safe="logo" src="assets/logos/logo-a.svg" alt="Tool A" style="width:72px;height:72px"><span data-safe="text" class="txt">Tool A</span></div>
+  <div id="logo-row-b" class="item logo-tile tool-row"><img data-safe="logo" src="assets/logos/logo-b.svg" alt="Tool B" style="width:72px;height:72px"><span data-safe="text" class="txt">Tool B</span></div>
+  <div id="logo-row-c" class="item logo-tile tool-row"><img data-safe="logo" src="assets/logos/logo-c.svg" alt="Tool C" style="width:72px;height:72px"><span data-safe="text" class="txt">Tool C</span></div>
+  <div id="logo-row-d" class="item logo-tile tool-row"><img data-safe="logo" src="assets/logos/logo-d.svg" alt="Tool D" style="width:72px;height:72px"><span data-safe="text" class="txt">Tool D</span></div>
+</div>
+<script>(function(){
+const tl=gsap.timeline({paused:true});
+const root=document.querySelector(".scene-art#logo-row");
+const sel=n=>root.querySelector("#logo-row-"+n);
+const host=root.closest("[data-beats]");
+// frames at 30 fps from the START of this component, from the trigger file. A logo starts 3 frames BEFORE its word.
+const beat=JSON.parse(host?.getAttribute("data-beats")||'{"title":0,"a":20,"b":44,"c":62,"d":80}');
+const dur=4, time=f=>f/30, t=n=>time(beat[n]);
+const gain=(n,o={})=>{const {dy=12,scale=1,frames=14,ease="power3.out"}=o;tl.fromTo(sel(n),{opacity:0,y:dy,scale},{opacity:1,y:0,scale:1,duration:time(frames),ease,immediateRender:false},t(n));};
+gain("title",{frames:10,dy:0});
+["a","b","c","d"].forEach(n=>gain(n,{scale:.88,dy:6,frames:9,ease:"back.out(1.8)"}));
+tl.to(root.querySelectorAll(".item"),{opacity:0,duration:time(6),ease:"power2.in"},dur-time(6));
+tl.to({},{duration:dur},0);
+window.__timelines=window.__timelines||{};window.__timelines["logo-row"]=tl;
+})();</script></div></template>

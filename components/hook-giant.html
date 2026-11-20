@@ -1,0 +1,32 @@
+<!-- HOOK GIANT: the first spoken line as large rows that slam in on their words.
+     Rows: a small line, a main line, one serif italic accent word, a last line. Replace the text, keep four rows.
+     If a row fails 4.5:1 contrast against the picture, place the group on a .glass card. -->
+<template><div id="hook-giant" class="scene-art" data-composition-id="hook-giant" data-width="1080" data-height="1920" data-duration="3" style="position:absolute;inset:0;width:1080px;height:1920px;pointer-events:none">
+<style>
+#hook-giant .row{position:absolute;left:120px;width:736px;text-align:center;line-height:.88;font-family:var(--font-giant);font-weight:700;-webkit-text-stroke:2px var(--text);paint-order:stroke fill;transform-origin:50% 50%;color:var(--text)}
+#hook-giant .r1{top:290px;font-size:108px;letter-spacing:.035em}
+#hook-giant .r2{top:406px;font-size:201px;letter-spacing:-.025em}
+#hook-giant .r3{top:578px;font:italic 139px/.9 var(--font-serif);color:var(--accent);-webkit-text-stroke:8px var(--text)}
+#hook-giant .r4{top:727px;font-size:65px;letter-spacing:.016em}
+</style>
+<div id="hook-giant-r1" class="item row r1"><span data-safe="text" class="txt">DESIGNERS,</span></div>
+<div id="hook-giant-r2" class="item row r2"><span data-safe="text" class="txt">ONE SKILL</span></div>
+<div id="hook-giant-r3" class="item row r3"><span data-safe="text" class="txt">away</span></div>
+<div id="hook-giant-r4" class="item row r4"><span data-safe="text" class="txt">FROM OWNING THE PRODUCT</span></div>
+<script>(function(){
+const tl=gsap.timeline({paused:true});
+const root=document.querySelector(".scene-art#hook-giant");
+const sel=n=>root.querySelector("#hook-giant-"+n);
+const host=root.closest("[data-beats]");
+const beat=JSON.parse(host?.getAttribute("data-beats")||'{"r1":0,"r2":26,"r3":42,"r4":54}');
+const dur=3, time=f=>f/30, t=n=>time(beat[n]);
+// each row slams on its spoken word: overshoot 1.055 then settle to 1
+["r1","r2","r3","r4"].forEach(n=>{
+  tl.fromTo(sel(n),{opacity:0,scale:1.25},{opacity:1,scale:1.055,duration:time(4),ease:"power3.out",immediateRender:false},t(n));
+  tl.to(sel(n),{scale:1,duration:time(5),ease:"power2.out"},t(n)+time(4));
+});
+// reading hold, then a 4-frame wipe out (hold at least 1.2 s after the last row)
+tl.to(root.querySelectorAll(".item"),{opacity:0,duration:time(4),ease:"power2.in"},dur-time(4));
+tl.to({},{duration:dur},0);
+window.__timelines=window.__timelines||{};window.__timelines["hook-giant"]=tl;
+})();</script></div></template>
